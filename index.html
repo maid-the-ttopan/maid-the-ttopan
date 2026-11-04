@@ -567,6 +567,49 @@ select{background:#f5f5f3;border-color:#cececb;color:#242424}
   body > .container { padding-bottom: 6px !important; }
   body > .container .title-image { margin-bottom: 0 !important; }
 }
+
+/* 데이터 백업 및 복원 */
+.data-tools{
+  margin-top:28px;padding:18px;border:1px solid var(--line);
+  background:rgba(255,255,255,.22);
+}
+.data-tools-title{font:600 20px "Gowun Batang",serif;text-align:center;margin-bottom:7px}
+.data-tools-desc{font-size:12px;line-height:1.7;color:var(--muted);text-align:center;margin:0 0 14px}
+.data-tools-actions{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
+.data-tools-actions button{
+  border:1px solid var(--brown);background:var(--brown);color:#f3f0eb;
+  padding:10px 15px;font:13px "Nanum Gothic",serif;cursor:pointer;
+}
+.data-tools-actions button.secondary{background:transparent;color:var(--ink);border-color:var(--line)}
+.data-tools-actions button:hover{filter:brightness(.96)}
+.data-tools-status{min-height:18px;margin-top:11px;text-align:center;font-size:12px;color:var(--muted)}
+.data-tools-status.error{color:#8a3e3e}
+.data-tools input[type=file]{display:none}
+@media(max-width:600px){.data-tools{padding:14px}.data-tools-actions{flex-direction:column}.data-tools-actions button{width:100%}}
+
+/* 통일 서체: 저택의 모든 화면과 입력 요소에 동일한 폰트를 적용 */
+html, body, body *, body *::before, body *::after {
+  font-family: "Nanum Gothic", sans-serif !important;
+}
+
+/* PC 메인 탭: 가로 스크롤 없이 한 줄에 모두 표시 */
+@media (min-width: 801px) {
+  .tabs {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 4px;
+    overflow: hidden;
+    padding-bottom: 14px;
+  }
+  .tabs .tab {
+    flex: 1 1 0;
+    min-width: 0;
+    white-space: nowrap;
+    padding: 8px 3px;
+    font-size: 11px;
+    letter-spacing: -0.04em;
+  }
+}
 </style>
 </head>
 <body>
@@ -584,6 +627,7 @@ select{background:#f5f5f3;border-color:#cececb;color:#242424}
   <button class="tab" data-tab="monthly">월간 관리</button>
   <button class="tab" data-tab="calendar">청소 달력</button>
   <button class="tab" data-tab="report">업무 일지</button>
+  <button class="tab" data-tab="archive">저택의 기록저장</button>
 </nav>
 
 <section class="section active" id="daily">
@@ -603,19 +647,19 @@ select{background:#f5f5f3;border-color:#cececb;color:#242424}
   <div class="task-group">
     <div class="group-title">청결 관리</div>
     <label class="task"><input type="checkbox"><span class="label">바닥의 먼지와 머리카락을 제거합니다.</span></label>
-    <label class="task"><input type="checkbox"><span class="label">세면대와 욕실의 물기를 닦는다.</span></label>
+    <label class="task"><input type="checkbox"><span class="label">세면대와 욕실의 물기를 닦습니다.</span></label>
     <label class="task"><input type="checkbox"><span class="label">쓰레기통을 비우고 새 봉투를 준비합니다.</span></label>
   </div>
   <div class="task-group">
     <div class="group-title">식사와 주방</div>
     <label class="task"><input type="checkbox"><span class="label">사용한 식기와 컵을 정리합니다.</span></label>
     <label class="task"><input type="checkbox"><span class="label">싱크대와 조리 공간을 정돈합니다.</span></label>
-    <label class="task"><input type="checkbox"><span class="label">냉장고 속 식품의 상태를 살핀다.</span></label>
+    <label class="task"><input type="checkbox"><span class="label">냉장고 속 식품의 상태를 살핍니다.</span></label>
   </div>
   <div class="task-group">
     <div class="group-title">저택 최종 순찰</div>
     <label class="task"><input type="checkbox"><span class="label">창문과 출입문을 확인합니다.</span></label>
-    <label class="task"><input type="checkbox"><span class="label">아가씨께서 불편을 느끼실 만한 사항이 없는지 살핀다.</span></label>
+    <label class="task"><input type="checkbox"><span class="label">아가씨께서 불편을 느끼실 만한 사항이 없는지 살펴봅니다.</span></label>
     <label class="task"><input type="checkbox"><span class="label">금일 업무를 모두 마쳤음을 확인합니다.</span></label>
   </div>
   <div class="special-service">
@@ -634,18 +678,18 @@ select{background:#f5f5f3;border-color:#cececb;color:#242424}
   <div class="task-group">
     <div class="group-title">월요일 · 침실</div>
     <label class="task"><input type="checkbox"><span class="label">침구를 교체하고 침대 주변을 청소합니다.</span></label>
-    <label class="task"><input type="checkbox"><span class="label">협탁과 가구의 먼지를 닦는다.</span></label>
+    <label class="task"><input type="checkbox"><span class="label">협탁과 가구의 먼지를 닦습니다.</span></label>
     <label class="task"><input type="checkbox"><span class="label">옷가지와 옷장을 정돈합니다.</span></label>
   </div>
   <div class="task-group">
     <div class="group-title">화요일 · 욕실</div>
     <label class="task"><input type="checkbox"><span class="label">변기와 세면대를 청소합니다.</span></label>
-    <label class="task"><input type="checkbox"><span class="label">거울과 욕실 바닥을 닦는다.</span></label>
+    <label class="task"><input type="checkbox"><span class="label">거울과 욕실 바닥을 닦습니다.</span></label>
     <label class="task"><input type="checkbox"><span class="label">수건을 교체하고 배수구를 확인합니다.</span></label>
   </div>
   <div class="task-group">
     <div class="group-title">수요일 · 주방</div>
-    <label class="task"><input type="checkbox"><span class="label">싱크대와 조리대를 꼼꼼히 닦는다.</span></label>
+    <label class="task"><input type="checkbox"><span class="label">싱크대와 조리대를 꼼꼼히 닦습니다.</span></label>
     <label class="task"><input type="checkbox"><span class="label">전자레인지와 조리기구를 청소합니다.</span></label>
     <label class="task"><input type="checkbox"><span class="label">냉장고의 오래된 식품을 점검합니다.</span></label>
   </div>
@@ -664,7 +708,7 @@ select{background:#f5f5f3;border-color:#cececb;color:#242424}
   <div class="task-group">
     <div class="group-title">주말 · 저택 순찰</div>
     <label class="task"><input type="checkbox"><span class="label">저택 전체를 환기합니다.</span></label>
-    <label class="task"><input type="checkbox"><span class="label">전구 및 시설의 이상 여부를 살핀다.</span></label>
+    <label class="task"><input type="checkbox"><span class="label">전구 및 시설의 이상 여부를 살핍니다.</span></label>
   </div>
 </section>
 
@@ -723,6 +767,23 @@ select{background:#f5f5f3;border-color:#cececb;color:#242424}
     <button class="save" onclick="saveNote()">포스트잇 붙이기</button>
   </div>
   <div class="notes-board" id="notesBoard"></div>
+</section>
+
+<section class="section" id="archive">
+  <div class="section-title"><span class="en">The Estate Archive</span><span class="ko">저택의 기록저장</span></div>
+  <div class="data-tools" aria-label="데이터 백업 및 복원">
+    <div class="data-tools-title">저택의 기록 보관</div>
+    <p class="data-tools-desc">
+      업무 기록과 특별 시중, 포스트잇을 파일로 백업하거나<br>
+      이전에 저장한 백업 파일에서 불러올 수 있습니다.
+    </p>
+    <div class="data-tools-actions">
+      <button type="button" id="exportData">기록 백업하기</button>
+      <button type="button" class="secondary" id="importData">백업 파일 불러오기</button>
+    </div>
+    <input type="file" id="importFile" accept=".json,application/json">
+    <div class="data-tools-status" id="dataToolsStatus" role="status" aria-live="polite"></div>
+  </div>
 </section>
 
 </div>
@@ -871,7 +932,7 @@ renderSpecial();
 function notes(){return JSON.parse(localStorage.getItem('maid-notes')||'[]')}
 function renderNotes(){
   const board=document.getElementById('notesBoard'),data=notes();
-  if(!data.length){board.innerHTML='<div class="empty-notes">아직 전달된 업무 보고가 없습니다.<br>첫 번째 포스트잇을 붙여보십시오.</div>';return}
+  if(!data.length){board.innerHTML='<div class="empty-notes">아직 전달된 업무 보고가 없습니다. 첫 번째 포스트잇을 붙여보십시오.</div>';return}
   board.innerHTML=data.map((n,i)=>`
     <div class="note-card" style="--rot:${n.rot}deg">
       <div class="note-pin"></div>
@@ -904,6 +965,122 @@ function renderMonthlyChart(){
   const max=Math.max(1,...vals.map(x=>x.n));
   el.innerHTML=vals.map(x=>`<div class="bar-col"><div class="bar-value">${x.n||''}</div><div class="bar-fill" style="height:${x.n?Math.max(3,x.n/max*125):0}px"></div><div class="bar-label">${x.name}</div></div>`).join('');
 }
+
+
+// ── 로컬 데이터 백업 / 복원 ──
+const BACKUP_KEYS = ['maid-records','maid-daily','maid-special','maid-notes'];
+const BACKUP_FORMAT = 'maid-the-ttopan-housekeeping-backup';
+function setBackupStatus(message, isError=false){
+  const el=document.getElementById('dataToolsStatus');
+  el.textContent=message;
+  el.classList.toggle('error',isError);
+}
+function collectBackupData(){
+  const data={};
+  BACKUP_KEYS.forEach(key=>{
+    const raw=localStorage.getItem(key);
+    if(raw!==null){
+      try{data[key]=JSON.parse(raw)}
+      catch(e){throw new Error('저장된 데이터('+key+')를 읽을 수 없습니다.')}
+    }else{
+      data[key]=null;
+    }
+  });
+  return data;
+}
+function exportBackup(){
+  try{
+    const backup={
+      format:BACKUP_FORMAT,
+      version:1,
+      exportedAt:new Date().toISOString(),
+      data:collectBackupData()
+    };
+    const blob=new Blob([JSON.stringify(backup,null,2)],{type:'application/json;charset=utf-8'});
+    const url=URL.createObjectURL(blob);
+    const a=document.createElement('a');
+    const stamp=dateKey(new Date());
+    a.href=url;
+    a.download=`maid-housekeeping-backup-${stamp}.json`;
+    document.body.appendChild(a);a.click();a.remove();
+    setTimeout(()=>URL.revokeObjectURL(url),1000);
+    setBackupStatus('백업 파일을 다운로드했습니다. 안전한 곳에 보관해 주세요.');
+  }catch(e){
+    setBackupStatus(e.message||'백업 파일을 만드는 중 오류가 발생했습니다.',true);
+  }
+}
+function validateBackup(backup){
+  if(!backup||backup.format!==BACKUP_FORMAT||backup.version!==1||
+     !backup.data||typeof backup.data!=='object'||Array.isArray(backup.data)){
+    throw new Error('이 앱에서 만든 백업 파일이 아닙니다.');
+  }
+  const d=backup.data;
+  if(d['maid-records']!==null &&
+     (!d['maid-records']||typeof d['maid-records']!=='object'||Array.isArray(d['maid-records'])))
+    throw new Error('업무 기록 데이터 형식이 올바르지 않습니다.');
+  if(d['maid-daily']!==null &&
+     (!Array.isArray(d['maid-daily'])||d['maid-daily'].some(v=>typeof v!=='boolean')))
+    throw new Error('오늘의 업무 체크 데이터 형식이 올바르지 않습니다.');
+  if(d['maid-special']!==null &&
+     (!Array.isArray(d['maid-special'])||d['maid-special'].some(v=>!v||typeof v.text!=='string'||typeof v.done!=='boolean')))
+    throw new Error('특별 시중 데이터 형식이 올바르지 않습니다.');
+  if(d['maid-notes']!==null &&
+     (!Array.isArray(d['maid-notes'])||d['maid-notes'].some(v=>!v||typeof v.text!=='string')))
+    throw new Error('포스트잇 데이터 형식이 올바르지 않습니다.');
+  BACKUP_KEYS.forEach(key=>{
+    if(!(key in d))throw new Error('백업 파일에 필요한 데이터가 빠져 있습니다.');
+  });
+}
+function refreshAfterImport(){
+  const saved=JSON.parse(localStorage.getItem('maid-daily')||'[]');
+  dailyBoxes().forEach((box,i)=>{
+    box.checked=!!saved[i];
+    box.closest('.task').classList.toggle('done',box.checked);
+  });
+  updateDaily(false);
+  renderSpecial();
+  renderNotes();
+  renderCalendar();
+  document.getElementById('historyContent').textContent='날짜를 선택해 주십시오.';
+}
+async function importBackupFile(file){
+  if(!file)return;
+  try{
+    const backup=JSON.parse(await file.text());
+    validateBackup(backup);
+    const date=backup.exportedAt ? new Date(backup.exportedAt) : null;
+    const dateLabel=date&&!Number.isNaN(date.getTime())
+      ? date.toLocaleString('ko-KR') : '날짜 정보 없음';
+    if(!confirm(`백업 날짜: ${dateLabel}\n\n현재 브라우저에 저장된 기록을 백업 파일의 내용으로 교체합니다.\n기존 데이터는 자동으로 합쳐지지 않습니다. 계속하시겠습니까?`))return;
+
+    const previous={};
+    BACKUP_KEYS.forEach(key=>previous[key]=localStorage.getItem(key));
+    try{
+      BACKUP_KEYS.forEach(key=>{
+        const value=backup.data[key];
+        if(value===null)localStorage.removeItem(key);
+        else localStorage.setItem(key,JSON.stringify(value));
+      });
+    }catch(writeError){
+      BACKUP_KEYS.forEach(key=>{
+        if(previous[key]===null)localStorage.removeItem(key);
+        else localStorage.setItem(key,previous[key]);
+      });
+      throw new Error('저장 공간 부족 등으로 복원하지 못했습니다. 기존 기록은 유지했습니다.');
+    }
+    refreshAfterImport();
+    setBackupStatus('백업 데이터를 성공적으로 불러왔습니다.');
+  }catch(e){
+    setBackupStatus(e instanceof SyntaxError?'JSON 파일을 읽을 수 없습니다. 올바른 백업 파일인지 확인해 주세요.':(e.message||'복원 중 오류가 발생했습니다.'),true);
+  }
+}
+document.getElementById('exportData').addEventListener('click',exportBackup);
+document.getElementById('importData').addEventListener('click',()=>document.getElementById('importFile').click());
+document.getElementById('importFile').addEventListener('change',event=>{
+  importBackupFile(event.target.files[0]);
+  event.target.value='';
+});
+
 
 renderCalendar();renderNotes();
 </script>
